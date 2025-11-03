@@ -52,8 +52,20 @@ columns = Orange.data.Domain([
                              Orange.data.ContinuousVariable("Quality"),
                              Orange.data.ContinuousVariable("Total-Quality")
                              ],
-                             metas=[Orange.data.StringVariable("Cluster")]
+                             metas=[Orange.data.StringVariable("Cluster"),
+                                    Orange.data.StringVariable("Quality-Status")
+                                    ]
                              )
+
+# funktion that takes the quality and returns a string in traffic-light style
+def check_quality(quality):
+    if quality >=0.85:
+        return "🟢 high"
+    if quality < 0.85 and quality >= 0.65:
+        return "🟡 medium"
+    else:
+        return "🔴 low"
+
 
 # defining rows
 rows = [
@@ -64,12 +76,14 @@ rows = [
          quality_dict[key],
          global_quality,
          key,
+         check_quality(quality_dict[key]),
          ]
         for key, value in cluster_view_amount_dict.items()
         ]
 
 # debug log for the rows of the table
 # print(rows)
+
 
 table = Orange.data.Table(columns, rows)
 out_data = table
