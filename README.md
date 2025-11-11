@@ -68,4 +68,4 @@ It includes explanations of different distance metrics, clustering methods, and 
 Developed by **Dominik Schmitt Klink & Lisa Haußmann**  
 as part of a small research project in collaboration with **Prof. Dr. Karsten Tolle**, *Big Data Lab Frankfurt* at **Goethe-Universität Frankfurt**.  
 Project: *"<PROJECT TITLE>"*
-
+Oktober 2025
