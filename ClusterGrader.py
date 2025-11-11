@@ -1,6 +1,6 @@
 import Orange
 
-# ****************** CONFIGURATIONS ****************** 
+# ****************** CONFIGURATIONS ******************
 # ending image names
 obverse_coin = "o.jpg"
 reverse_coin = "r.jpg"
@@ -39,7 +39,8 @@ cluster_view_amount_dict = {
 # This measures how homogeneous the cluster is. A value close to 1 means the cluster
 # contains mostly one type (front or back), while values near 0.5 indicate a mixed or less pure cluster.
 quality_dict = {
-    key: (max(value["front"], value["back"]) / sum((value["front"], value["back"])))
+    key: (max(value["front"], value["back"]) /
+          sum((value["front"], value["back"])))
     for key, value in cluster_view_amount_dict.items()
 }
 
