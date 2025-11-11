@@ -1,7 +1,12 @@
 import Orange
 
-# debug looking into the key values of the table
-# print([m.name for m in in_data.domain.metas])
+# ****************** CONFIGURATIONS ****************** 
+# ending image names
+obverse_coin = "o.jpg"
+reverse_coin = "r.jpg"
+# thresholds for quality (everything below medium is "bad")
+good = 0.85
+medium = 0.65
 
 
 # creating a dict with Cluster number as key and image_file names (list) as value
@@ -14,8 +19,8 @@ for data in in_data:
 # counting the amount of front-/rear-view images and putting it into a dict
 cluster_view_amount_dict = {
     key: {
-        "front": sum(img.endswith("o.jpg") for img in cluster),
-        "back": sum(img.endswith("r.jpg") for img in cluster),
+        "front": sum(img.endswith(obverse_coin) for img in cluster),
+        "back": sum(img.endswith(reverse_coin) for img in cluster),
     }
     for key, cluster in data_dict.items()
 }
@@ -78,9 +83,9 @@ columns = Orange.data.Domain(
 
 # funktion that takes the quality and returns a string in traffic-light style
 def check_quality(quality):
-    if quality >= 0.85:
+    if quality >= good:
         return "🟢 high"
-    if quality < 0.85 and quality >= 0.65:
+    if quality < good and quality >= medium:
         return "🟡 medium"
     else:
         return "🔴 low"
