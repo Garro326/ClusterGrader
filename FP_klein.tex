@@ -72,7 +72,7 @@
 	%------------------------------------------------
 	\section{Overview of the Workflow}
 
-	\includegraphics[width=16cm,height=40cm,keepaspectratio]{/home/lisa/WS2526/FP/pipeline_numbered.png}
+	\includegraphics[width=16cm,height=40cm,keepaspectratio]{/home/lisa/WS2526/FP/pipeline_numbered_small.png}
 	
 	\vspace{0.5cm}
 	\noindent The pipeline in Orange Data Mining uses several widgets to import, process, cluster, and analyze image data.    
@@ -86,16 +86,15 @@
 			Step & Widget & Purpose \\
 			\midrule
 			1 & CSV File Import & Load metadata of all coin images (including file names, cluster labels, or additional features). \\
-			2 & Data Table (1) & Inspect the imported data in tabular form. \\
-			3 & Formula & Optionally create or adjust variables (e.g., derive new numeric features). \\
-			4 & Distances (3) & Compute pairwise distances or similarities between coin images. \\
-			5 & Hierarchical Clustering (search\_all) & Perform clustering on the dataset using all available data. (Developed by a collaborator of the supervising team.) \\
-			6 & Hierarchical Clustering (3) & Optional alternative clustering with different parameters or subsets. \\
-			7 & Image Viewer & Visually inspect which images belong to each cluster for clustering with search\_all. \\
-			8 & Python Script & Analyze the clusters by counting obverse and reverse images to assess clustering quality. \\
-			9 & Image Viewer (5) & Review cluster assignments from optional alternative clustering (3) \\
-			10 & Data Table (2) & Review the cluster assignments and their quality in tabular form. \\
-			11 & Save Data & Save the clustered dataset and their quality. \\
+			2 & Formula & Adjust the file paths to the image folders as variables. 
+			 \\
+			3 & Distances & Compute pairwise distances or similarities between coin images. \\
+			4 & Hierarchical Clustering (search\_all) & Perform clustering on the dataset using all available data. (Developed by Sebastian Gampe, member of the supervising team.) \\
+			5 & ClusterGrader & Analyze the clusters by counting obverse and reverse images to assess clustering quality. \\
+			6 & Data Table (2) & Review the cluster assignments and their quality in tabular form. \\
+			7 & Save Data & Save the clustered dataset and their quality. \\
+			8 & Data Table (1) & Inspect the imported data in tabular form. \\
+			9 & Image Viewer & Visually inspect which images belong to each cluster for clustering with search\_all. \\
 			\bottomrule
 		\end{tabular}
 	\end{table}
@@ -107,7 +106,7 @@
 	The widgets can be combined flexibly depending on the research question and available data.  
 	While some steps are essential, others are optional and serve to verify or refine the dataset.
 	
-	\subsection*{CSV File Import}
+	\subsection{CSV File Import}
 	The CSV File Import widget is used to load the metadata of all research images into Orange.  
 	The file typically contains a matrix with a number, which describes the similarity between every image, for example based on visual similarity measures or extracted features.  
 	This file serves as the foundation for further clustering.  
@@ -115,17 +114,12 @@
 	Additional numeric or categorical data can also be included.  
 	After importing, the widget outputs a data table that can be used as input for the next components or to verify the correct import.
 	
-	\subsection*{Data Table}
-	The Data Table widget allows the user to inspect the data at any point in the workflow.  
-	It is mainly used to verify that all attributes have been correctly imported or computed.  
-	Opening this widget is optional but recommended before distance calculation or clustering.
-	
-	\subsection*{Formula}
+	\subsection{Formula}
 	The Formula widget is used to define the exact file paths to the image folders that should be included in the clustering process.  
 	Each variable in the widget represents one processing stage of the coin images, for example, grayscale versions, denoised images, histogram equalization, or cropped variants.  \\
 	By defining several path variables, researchers can easily switch between or compare different preprocessing steps. This allows flexible experimentation with different preprocessing conditions, enabling comparisons between visual variants of the same coins and their effect on clustering results.
 	
-	In the \textit{Variable Definitions} field, a new variable (for example path\_1) is created.  
+	In the Variable Definitions field, a new variable (for example path\_1) is created.  
 	Its value is the complete path to the folder containing the desired image version, followed by '+name'.  
 	The 'name' variable comes from the dataset and represents the individual image file name from the CSV input.
 	
@@ -142,8 +136,8 @@
 	\end{itemize}
 	
 	Replace the part of the path (e.g. /home/max/images/grayscale/) with the actual location where your images are stored.  
-	The final '+name' part should not be replaced or removed, as it automatically appends each image filename from the dataset to the selected folder path.
-	
+	The final '+name' part should not be replaced or removed, as it automatically appends each image filename from the dataset to the selected folder path. \\
+	\includegraphics[width=15cm,height=40cm,keepaspectratio]{/home/lisa/WS2526/FP/formula.png} \\
 	Each folder path can represent a specific processing level of the images, such as:
 	\begin{itemize}
 		\item grayscale: grayscale conversion  
@@ -156,97 +150,115 @@
 	By adding multiple path variables (e.g. path\_1, path\_2, path\_3), users can experiment with different preprocessing versions of the dataset within the same workflow and analyze how each affects the clustering results.
 	
 
-	
-	\subsection*{Distances}
+	\newpage	
+	\subsection{Distances}
 	The Distances widget calculates pairwise distances or similarities between the image features.  
 	It is one of the core components of the workflow and defines how “similar” two coin images are considered.  
-	Different distance metrics can be selected depending on the research focus, for example, Cosine or Pearson (absolute) (see Section~\ref{sec:metrics} for details).
-	\\\\
-	\includegraphics[width=6cm,height=15cm,keepaspectratio]{/home/lisa/WS2526/FP/distance.png}
-	\subsection*{Hierarchical Clustering (search\_all)}
+	Different distance metrics can be selected depending on the research focus, for example, Cosine or Pearson (absolute) (see Section \hyperref[sec:metrics]{Distance Metrics} for details).
+	\\
+	\includegraphics[width=15cm,height=35cm,keepaspectratio]{/home/lisa/WS2526/FP/distances.png}
+	
+	\subsection{Hierarchical Clustering (search\_all)}
 	This custom widget performs the hierarchical clustering on the dataset using all available data.  
-	It was developed by a collaborator of the supervising research group.  
+	It was developed by a Sebastian Gampe, member of the supervising research group.  
 	The widget automatically searches for suitable clustering and outputs the resulting group assignments.  
 	It represents the main clustering step in the workflow.
 	
-	\subsection*{Hierarchical Clustering}
-	The standard \textbf{Hierarchical Clustering} widget can be used to run alternative clustering configurations or to compare parameter settings.  
-	It provides access to linkage methods such as \textbf{Average} or \textbf{Complete} linkage and allows the user to interactively adjust the number of clusters.
+	Within the widget interface, users can select which image paths (e.g. path\_1, path\_2, path\_3, etc.) should be used for the clustering.  
+	By changing the selected path, one can directly compare how the visual preprocessing affects the cluster formation.
 	
-	\subsection*{Image Viewer}
-	The \textbf{Image Viewer} widget visualizes the images contained in a selected cluster.  
-	This helps to evaluate whether the clustering corresponds to numismatic expectations — for example, whether the dies, styles, or motifs appear related.  
-	The widget can be placed at different points in the workflow to visually inspect intermediate or final results.
+	The widget allows the user to choose the desired linkage method (e.g. Average, Complete, or Weighted).  
+	This setting determines how the distances between image groups are calculated during the hierarchical merging process and therefore has a major influence on the final cluster structure (see Section \hyperref[sec:linkages]{Linkage Methods} for details).
 	
-	\subsection*{Save Data}
-	The \textbf{Save Data} widget stores the clustered dataset to disk for later reuse or external analysis.  
-	This ensures reproducibility and allows further evaluation in other tools.
+	\includegraphics[width=15cm,height=35cm,keepaspectratio]{/home/lisa/WS2526/FP/clustering.png}
 	
-	\subsection*{Python Script}
-	The \textbf{Python Script} widget contains the custom script that evaluates the internal consistency of each cluster.  
-	It counts how many obverse (\texttt{o.jpg}) and reverse (\texttt{r.jpg}) images are present and calculates a quality score based on their ratio.  
+	
+	\subsection{ClusterGrader}
+	The ClusterGrader widget contains the custom script that evaluates the internal consistency of each cluster.  
+	It counts how many obverse (o.jpg) and reverse (r.jpg) images are present and calculates a quality score based on their ratio.  
 	The resulting values describe how homogeneous each cluster is in terms of image orientation and serve as a proxy for clustering reliability.
 	
-	\subsection*{Data Table (Output)}
-	The final \textbf{Data Table (Output)} displays the calculated values — the number of front and back images per cluster, total counts, and the global average quality.  
+	\subsection{Data Table (2)}
+	The final Data Table (2) displays the calculated values, the number of front and back images per cluster, total counts, the local cluster quality and the global average quality. Additionally, the individual cluster quality scores are visualized using a traffic-light system: 
+	green for values $\geq 0.85$, yellow for values $< 0.85$ and $\geq 0.65$, and red for all scores below $0.65$.
+	 
 	These results can be sorted, exported, or directly compared across different clustering configurations.
 	\\\\
 	\includegraphics[width=16cm,height=40cm,keepaspectratio]{/home/lisa/WS2526/FP/data_table.png}
 	
+	\subsection{Save Data}
+	The Save Data widget stores the clustered dataset to disk for later reuse or external analysis.  
+	This ensures reproducibility and allows further evaluation in other tools. Saving the data is optional but recommended.
+	
+	\subsection*{Data Table (1)}
+	The Data Table widget allows the user to inspect the data at any point in the workflow.  
+	It is mainly used to verify that all attributes have been correctly imported or computed.  
+	Opening this widget is optional but recommended before distance calculation or clustering.
+	
+	\subsection{Image Viewer}
+	The Image Viewer widget visualizes the images contained in one or multiple selected clusters.  
+	This helps to evaluate whether the clustering corresponds to numismatic expectations. 
+	The widget can be placed at different points in the workflow to visually inspect intermediate or final results.
+	
 	%----------------------------------------------------
 	
-	\section{Distance Metrics and Linkage Methods}
+	\section{Distance Metrics}
+	\label{sec:metrics}
 	The workflow supports several distance metrics and linkage methods.  
 	In practice, two configurations have proven particularly meaningful for numismatic image clustering, as they reflect different aspects of die similarity and visual variation.
 	
-	\subsection*{Cosine Distance}
-	Cosine distance measures the \textbf{angle between image feature vectors}, focusing on their orientation rather than magnitude.  
+	\subsection{Cosine Distance}
+	Cosine distance measures the angle between image feature vectors, focusing on their orientation rather than magnitude.  
 	It captures how similar the structures or shapes are, regardless of overall brightness or contrast.  
 	This makes it highly useful for coin images photographed under different lighting conditions.  
 	Using cosine distance helps to group coins that share similar engravings or die characteristics, even if illumination differs.
+	\\
+	In summary, cosine distance is well suited for detecting general structural similarities between coin images and remains robust even when illumination or contrast vary.
 	
-	\subsection*{Pearson (Absolute) Distance}
-	Pearson correlation distance compares the \textbf{linear relationship} between two feature vectors.  
+	
+	\subsection{Pearson (Absolute) Distance}
+	Pearson correlation distance compares the linear relationship between two feature vectors.  
 	When used in its absolute form, it measures how strongly two images vary together, ignoring whether one is brighter or darker.  
 	This emphasizes the general similarity of surface patterns and relief structures rather than pixel-level details.  
 	In die studies, Pearson (absolute) can reveal coins produced with similar but not identical dies, capturing subtle engraving parallels.
+	\\
+	In summary, Pearson (absolute) distance is more sensitive to fine engraving details, capturing subtle variations in die patterns by measuring how strongly image features vary together.
 	
-	\subsection*{Average Linkage}
+	
+	%----------------------------------------------------
+
+	\section{Linkage Methods}
+	\label{sec:linkages}
+	\subsection{Average Linkage}
 	Average linkage computes the average distance between all pairs of elements in two clusters.  
 	It produces balanced, stable clusters and avoids chaining effects.  
 	For die analysis, this method helps identify general families of dies or stylistic groups, providing a broader picture of related coin types.
 	
-	\subsection*{Complete Linkage}
+	\subsection{Complete Linkage}
 	Complete linkage uses the maximum distance between two elements in different clusters.  
 	It forms compact and well-separated groups.  
-	In the context of coin analysis, this is suitable when focusing on very close matches — coins almost certainly struck from the same die — while excluding more distant similarities.
+	In the context of coin analysis, this is suitable when focusing on very close matches, coins almost certainly struck from the same die, while excluding more distant similarities.
 	
 	\subsection*{Other Metrics and Linkages}
-	For other distance metrics and linkage types (e.g., Euclidean, Manhattan, Single Linkage, Ward’s method), please refer to the official Orange Data Mining documentation:  
+	For other distance metrics and linkage types (e.g., Euclidean, Manhattan, Single Linkage, Ward’s method), please refer to the official Orange Data Mining documentation:\\  
 	\url{https://orangedatamining.com/widget-catalog/}
 	
 	%------------------------------------------------
+	\newpage
 	\section{Interpretation}
-	The clustering step groups coin images based on visual similarity of die features, while the subsequent quality evaluation checks whether obverse and reverse images were accidentally mixed.  
-	The resulting values allow researchers to quickly estimate the reliability of the clustering and to understand how parameter choices (distance metric and linkage) influence the outcome.
-	
-	Clusters containing only obverse or only reverse images indicate high internal consistency and are more likely to represent coins struck from the same or related dies.  
-	Mixed clusters, on the other hand, suggest over-broad grouping or unsuitable parameter settings.
-	
-	%------------------------------------------------
-	\section{Appendix – Technical Note}
-	The Python Script widget uses a custom Orange Data Mining script that:
-	\begin{enumerate}
-		\item Groups all images by their cluster ID.
-		\item Counts the number of front/back images in each group.
-		\item Computes per-cluster and global quality metrics.
-		\item Outputs a summary table for visualization and export.
-	\end{enumerate}
-	
-	%------------------------------------------------
-	\section*{Summary}
-	This workflow provides an accessible method to cluster and evaluate coin images based on die similarity.  
-	By combining hierarchical clustering, visual inspection, and an automated quality score, it helps numismatists assess dataset consistency and test how clustering parameters affect their results.
+	The ClusterGrader workflow provides both a visual and quantitative way to assess how consistently coin images have been grouped according to their die characteristics.  
+	The structure of the resulting clusters depends mainly on the selected distance metric and linkage method, which determine how the underlying similarity between images is interpreted.
+	\\
+	Cosine distance highlights general structural features and is robust to illumination or contrast differences, often producing broader clusters that group images sharing similar overall shapes or engravings.  
+	Pearson (absolute) distance, in contrast, is more sensitive to fine variations in relief and engraving patterns, which can lead to narrower clusters that capture subtle stylistic or die-related similarities.  
+	These differences allow researchers to decide whether they want to identify broader die families or focus on more precise engraving parallels.
+	\\
+	The chosen linkage method further shapes the character of the clusters.  
+	Average linkage produces balanced and stable groups that reflect general stylistic relationships, making it suitable for identifying wider die families or thematic similarities.  
+	Complete linkage forms compact, tightly related clusters by prioritizing the greatest pairwise distances; this often isolates visually very close images and may reveal coins that were produced with highly similar or even identical dies.
+	\\
+	The ClusterGrader output summarizes the effects of these settings by reporting, for each cluster, the number of obverse and reverse images as well as a quality score based on their ratio.  
+	Clusters dominated by a single side type tend to be more visually coherent, whereas clusters containing both sides exhibit a lower degree of internal consistency.  
 	
 	
 \end{document}
