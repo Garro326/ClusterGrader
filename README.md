@@ -55,11 +55,6 @@ It includes explanations of different distance metrics, clustering methods, and 
 - **Quality ≈ 0.7 → moderate cluster** (mostly one type, some mixing)  
 - **Quality ≤ 0.5 → poor cluster** (strongly mixed)
 
----
-
-## License
-
-**TODO**
 
 ---
 
@@ -67,5 +62,4 @@ It includes explanations of different distance metrics, clustering methods, and 
 
 Developed by **Dominik Schmitt Klink & Lisa Haußmann**  
 as part of a small research project in collaboration with **Prof. Dr. Karsten Tolle**, *Big Data Lab Frankfurt* at **Goethe-Universität Frankfurt**.  
-Project: *"<PROJECT TITLE>"*
-Oktober 2025
+November 2025

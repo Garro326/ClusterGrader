@@ -100,6 +100,7 @@
 	\end{table}
 	
 	%------------------------------------------------
+	\newpage
 	\section{Widget Overview and Usage}
 	
 	This section explains the function and typical use of each widget within the ClusterGrader workflow.  
@@ -118,11 +119,11 @@
 	The Formula widget is used to define the exact file paths to the image folders that should be included in the clustering process.  
 	Each variable in the widget represents one processing stage of the coin images, for example, grayscale versions, denoised images, histogram equalization, or cropped variants.  \\
 	By defining several path variables, researchers can easily switch between or compare different preprocessing steps. This allows flexible experimentation with different preprocessing conditions, enabling comparisons between visual variants of the same coins and their effect on clustering results.
-	
+	\\
 	In the Variable Definitions field, a new variable (for example path\_1) is created.  
 	Its value is the complete path to the folder containing the desired image version, followed by '+name'.  
 	The 'name' variable comes from the dataset and represents the individual image file name from the CSV input.
-	
+	\newpage
 	\paragraph{Examples of correct syntax:}
 	\begin{itemize}
 		\item \textbf{Windows:}\\
@@ -134,7 +135,7 @@
 		\item \textbf{macOS:}\\
 		"/Users/max/images/grayscale/"+name
 	\end{itemize}
-	
+	\noindent
 	Replace the part of the path (e.g. /home/max/images/grayscale/) with the actual location where your images are stored.  
 	The final '+name' part should not be replaced or removed, as it automatically appends each image filename from the dataset to the selected folder path. \\
 	\includegraphics[width=15cm,height=40cm,keepaspectratio]{/home/lisa/WS2526/FP/formula.png} \\
@@ -146,7 +147,7 @@
 		\item 2\_histogram\_equalization: alternative histogram normalization  
 		\item circle\_crop: cropped and centered images
 	\end{itemize}
-	
+	\noindent
 	By adding multiple path variables (e.g. path\_1, path\_2, path\_3), users can experiment with different preprocessing versions of the dataset within the same workflow and analyze how each affects the clustering results.
 	
 
@@ -163,10 +164,10 @@
 	It was developed by a Sebastian Gampe, member of the supervising research group.  
 	The widget automatically searches for suitable clustering and outputs the resulting group assignments.  
 	It represents the main clustering step in the workflow.
-	
+	\\
 	Within the widget interface, users can select which image paths (e.g. path\_1, path\_2, path\_3, etc.) should be used for the clustering.  
 	By changing the selected path, one can directly compare how the visual preprocessing affects the cluster formation.
-	
+	\\
 	The widget allows the user to choose the desired linkage method (e.g. Average, Complete, or Weighted).  
 	This setting determines how the distances between image groups are calculated during the hierarchical merging process and therefore has a major influence on the final cluster structure (see Section \hyperref[sec:linkages]{Linkage Methods} for details).
 	
@@ -177,11 +178,14 @@
 	The ClusterGrader widget contains the custom script that evaluates the internal consistency of each cluster.  
 	It counts how many obverse (o.jpg) and reverse (r.jpg) images are present and calculates a quality score based on their ratio.  
 	The resulting values describe how homogeneous each cluster is in terms of image orientation and serve as a proxy for clustering reliability.
+	\\
+	For users interested in reviewing or extending the underlying code of the ClusterGrader, the complete implementation is available on GitHub at: \url{https://github.com/Garro326/ClusterGrader}.
+	
 	
 	\subsection{Data Table (2)}
 	The final Data Table (2) displays the calculated values, the number of front and back images per cluster, total counts, the local cluster quality and the global average quality. Additionally, the individual cluster quality scores are visualized using a traffic-light system: 
 	green for values $\geq 0.85$, yellow for values $< 0.85$ and $\geq 0.65$, and red for all scores below $0.65$.
-	 
+	 \\
 	These results can be sorted, exported, or directly compared across different clustering configurations.
 	\\\\
 	\includegraphics[width=16cm,height=40cm,keepaspectratio]{/home/lisa/WS2526/FP/data_table.png}
@@ -201,12 +205,11 @@
 	The widget can be placed at different points in the workflow to visually inspect intermediate or final results.
 	
 	%----------------------------------------------------
-	
 	\section{Distance Metrics}
 	\label{sec:metrics}
 	The workflow supports several distance metrics and linkage methods.  
 	In practice, two configurations have proven particularly meaningful for numismatic image clustering, as they reflect different aspects of die similarity and visual variation.
-	
+	\newpage
 	\subsection{Cosine Distance}
 	Cosine distance measures the angle between image feature vectors, focusing on their orientation rather than magnitude.  
 	It captures how similar the structures or shapes are, regardless of overall brightness or contrast.  
