@@ -54,6 +54,17 @@ It includes explanations of different distance metrics, clustering methods, and 
 - **Quality ≈ 1.0 → good cluster** (contains only front or only back images)  
 - **Quality ≈ 0.7 → moderate cluster** (mostly one type, some mixing)  
 - **Quality ≤ 0.5 → poor cluster** (strongly mixed)
+---
+
+## License
+
+This project is licensed under the  
+**Creative Commons Attribution–NonCommercial–ShareAlike 3.0 Germany License (CC BY-NC-SA 3.0 DE).**
+
+Full license text (German):  
+http://creativecommons.org/licenses/by-nc-sa/3.0/de/
+
+See the included file **LICENSE.md** for details.
 
 
 ---
@@ -61,5 +72,5 @@ It includes explanations of different distance metrics, clustering methods, and 
 ## Author
 
 Developed by **Dominik Schmitt Klink & Lisa Haußmann**  
-as part of a small research project in collaboration with **Prof. Dr. Karsten Tolle**, *Big Data Lab Frankfurt* at **Goethe-Universität Frankfurt**.  
+as part of a small research project in collaboration with **Dr. Karsten Tolle**, *Big Data Lab Frankfurt* at **Goethe-Universität Frankfurt**.  
 November 2025
