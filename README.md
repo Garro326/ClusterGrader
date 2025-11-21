@@ -51,9 +51,9 @@ It includes explanations of different distance metrics, clustering methods, and 
 
 **TODO**
 
-- **Quality ≈ 1.0 → good cluster** (contains only front or only back images)  
-- **Quality ≈ 0.7 → moderate cluster** (mostly one type, some mixing)  
-- **Quality ≤ 0.5 → poor cluster** (strongly mixed)
+- **Quality ≥ 0.85 → good cluster** (contains only front or only back images)  
+- **0.85 > Quality ≥ 0.65 → medium cluster** (mostly one type, some mixing)  
+- **Quality < 0.65 → low cluster** (strongly mixed)
 ---
 
 ## License
