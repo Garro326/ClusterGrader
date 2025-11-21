@@ -26,6 +26,7 @@ where `q_i` is the purity of cluster *i*, and `n_i` is its size.
 | Column            | Description                             |
 |-------------------|-----------------------------------------|
 | **Cluster**       | Cluster label (string)                  |
+| **Quality-Status**| Traffic-light category based on purity  |
 | **Front**         | Number of front-view images             |
 | **Back**          | Number of rear-view images              |
 | **Total**         | Total images in the cluster             |
