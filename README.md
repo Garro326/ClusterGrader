@@ -58,6 +58,8 @@ It includes explanations of different distance metrics, clustering methods, and 
 ## Version
 This project is implemented in Orange version 3.38.1
 
+---
+
 ## License
 
 This project is licensed under the  
