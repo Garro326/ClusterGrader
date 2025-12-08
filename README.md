@@ -50,12 +50,13 @@ It includes explanations of different distance metrics, clustering methods, and 
 
 ## Example Interpretation
 
-**TODO**
-
 - **Quality ≥ 0.85 → good cluster** (contains only front or only back images)  
 - **0.85 > Quality ≥ 0.65 → medium cluster** (mostly one type, some mixing)  
 - **Quality < 0.65 → low cluster** (strongly mixed)
 ---
+
+## Version
+This project is implemented in Orange version 3.38.1
 
 ## License
 
