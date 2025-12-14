@@ -26,6 +26,7 @@ where `q_i` is the purity of cluster *i*, and `n_i` is its size.
 | Column            | Description                             |
 |-------------------|-----------------------------------------|
 | **Cluster**       | Cluster label (string)                  |
+| **Quality-Status**| Traffic-light category based on purity  |
 | **Front**         | Number of front-view images             |
 | **Back**          | Number of rear-view images              |
 | **Total**         | Total images in the cluster             |
@@ -49,11 +50,14 @@ It includes explanations of different distance metrics, clustering methods, and 
 
 ## Example Interpretation
 
-**TODO**
+- **Quality ≥ 0.85 → good cluster** (contains only front or only back images)  
+- **0.85 > Quality ≥ 0.65 → medium cluster** (mostly one type, some mixing)  
+- **Quality < 0.65 → low cluster** (strongly mixed)
+---
 
-- **Quality ≈ 1.0 → good cluster** (contains only front or only back images)  
-- **Quality ≈ 0.7 → moderate cluster** (mostly one type, some mixing)  
-- **Quality ≤ 0.5 → poor cluster** (strongly mixed)
+## Version
+This project is implemented in Orange version 3.38.1
+
 ---
 
 ## License
